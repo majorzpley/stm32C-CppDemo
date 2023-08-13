@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build STM32 Firmware",
+			"command": "make -j2",
+			"args": [],
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		},
+		{
+			"type": "shell",
+			"label": "Build and Download",
+			"command": "openocd",
+			"args": [
+				"-f",
+				"E:/APPS/xpack-openocd-0.12.0-1/openocd/scripts/interface/cmsis-dap.cfg",
+				"-f",
+				"E:/APPS/xpack-openocd-0.12.0-1/openocd/scripts/target/stm32f1x.cfg",
+				"-c",
+				"program build/BlinkCppDemo.elf verify reset exit"
+			],
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"dependsOn": "Build STM32 Firmware"
+		}
+	]
+}
